@@ -1,0 +1,26 @@
+@charset "utf-8";
+/* CSS Document */
+
+.vertical-text {
+	transform: rotate(90deg);
+	transform-origin: left top 0;
+}
+
+.banner-copy {
+	bottom: 265px;
+    right: -225px;
+
+}
+
+.line-height-72 {line-height: 72px;}
+
+.letter-spacing-normal {letter-spacing: normal;}
+
+.font-xsmall { font-size: 10px;}
+
+.font-small { font-size: 12px;}
+
+.banners-position {
+	bottom: 0px;
+	right: 0px;
+}

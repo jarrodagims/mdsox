@@ -1,0 +1,176 @@
+@charset "utf-8";
+/* CSS Document */
+
+.product-img {
+width: 100%;
+display: block;
+position: relative;
+height: 800px;
+}
+
+.product-img .slider {
+width: 100%;
+height: 100%;
+position: absolute;
+top: 0px;
+right: 0px;
+opacity: 0;
+transition: all 0.3s ease;
+}
+
+.product-img .slider .lazy {
+opacity: 1;
+}
+
+.product-img .active{
+opacity: 1;
+}
+
+
+/* Product Configuration */
+.product-color span {
+font-size: 14px;
+font-weight: 400;
+color: #86939E;
+}
+/* Product Color */
+.color-choose div {
+display: inline-block;
+}
+.color-choose input[type="radio"] {
+display: none;
+}
+.color-choose input[type="radio"] + label span {
+display: inline-block;
+width: 25px;
+height: 25px;
+margin: -1px 2px 0 0;
+vertical-align: middle;
+cursor: pointer;
+border-radius: 50%;
+border: 2px solid #FFFFFF;
+box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.33);
+}
+.color-choose input[type="radio"]#lightblue2 + label span {
+background-color: #355377;
+}
+.color-choose input[type="radio"]#lightgray + label span {
+background-color: #535769;
+}
+.color-choose input[type="radio"]#darkgray + label span {
+background-color: #2f343e;
+}
+.color-choose input[type="radio"]#darkgreen + label span {
+background-color: #233d23;
+}
+.color-choose input[type="radio"]#lightlilac + label span {
+background-color: #9d83b3;
+}
+.color-choose input[type="radio"]#darklilac + label span {
+background-color: #7d5495;
+}
+.color-choose input[type="radio"]#aqua + label span {
+background-color: #00a3b0;
+}
+.color-choose input[type="radio"]#gray + label span {
+background-color: #949494;
+}
+.color-choose input[type="radio"]#brown + label span {
+background-color: #633c11;
+}
+.color-choose input[type="radio"]#nude + label span {
+background-color: #cc9a65;
+}
+.color-choose input[type="radio"]#navyblue + label span {
+background-color: #1b3765;
+}
+.color-choose input[type="radio"]#royalblue + label span {
+background-color: #0966ea;
+}
+.color-choose input[type="radio"]#red + label span {
+background-color: #ea0a0b;
+}
+.color-choose input[type="radio"]#green + label span {
+background-color: #67e61f;
+}
+.color-choose input[type="radio"]#lightblue + label span {
+background-color: #22c1e9;
+}
+.color-choose input[type="radio"]#pink + label span {
+background-color: #e82076;
+}
+.color-choose input[type="radio"]#yellow + label span {
+background-color: #ffea09;
+}
+.color-choose input[type="radio"]#white + label span {
+background-color: #e1e1e1;
+z-index: 10;
+}
+.color-choose input[type="radio"]#black + label span {
+background-color: #323232;
+}
+.color-choose input[type="radio"]:checked + label span {
+background-image: url(http://lisenme.com/demo/color_change/images/check-icn.svg);
+background-repeat: no-repeat;
+background-position: center;
+}
+
+
+
+
+
+.product-img-a {
+width: 50%;
+display: block;
+position: relative;
+height:250px;
+}
+.product-img-a img {
+width: auto;
+height: 100%;
+position: absolute;
+opacity: 0;
+transition: all 0.3s ease;
+}
+.product-img-a img.active-a {
+opacity: 1;
+}
+/* Product Configuration */
+.product-color-a span {
+font-size: 14px;
+font-weight: 400;
+color: #86939E;
+}
+/* Product Color */
+.color-choose-a div {
+display: inline-block;
+}
+.color-choose-a input[type="radio"] {
+display: none;
+}
+.color-choose-a input[type="radio"] + label span {
+display: inline-block;
+width: 25px;
+height: 25px;
+margin: -1px 2px 0 0;
+vertical-align: middle;
+cursor: pointer;
+/* border-radius: 50%; */
+border: 2px solid #FFFFFF;
+box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.33);
+}
+.color-choose-a input[type="radio"]#reda + label span {
+background-color: #C91524;
+}
+.color-choose-a input[type="radio"]#bluea + label span {
+background-color: #314780;
+z-index: 10;
+}
+.color-choose-a input[type="radio"]#blacka + label span {
+background-color: #323232;
+}
+.color-choose-a input[type="radio"]:checked + label span {
+background-image: url(http://lisenme.com/demo/color_change/images/check-icn.svg);
+background-repeat: no-repeat;
+background-position: center;
+}

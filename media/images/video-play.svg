@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Untitled-Page_x25_201" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+	 x="0px" y="0px" width="84px" height="87px" viewBox="0 0 84 87" enable-background="new 0 0 84 87" xml:space="preserve">
+<filter  height="300%" width="300%" id="filter2" y="-100%" x="-100%">
+	<!--  Drop Shadow  -->
+	<feOffset  dy="8" dx="0" in="SourceGraphic" result="out"></feOffset>
+	<feColorMatrix  type="matrix" in="out" result="out" values="0 0 0 0 0  0 0 0 0.5137 0  0 0 0 1 0  0 0 0 1 0"></feColorMatrix>
+	<feGaussianBlur  stdDeviation="13" in="out" result="out"></feGaussianBlur>
+	<feBlend  mode="normal" in2="out" in="SourceGraphic" result="Drop_Shadow2"></feBlend>
+</filter>
+<filter  height="300%" width="300%" id="filter1" y="-100%" x="-100%">
+	<!--  Drop Shadow  -->
+	<feOffset  dy="8" dx="0" in="SourceGraphic" result="out"></feOffset>
+	<feColorMatrix  type="matrix" in="out" result="out" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.3 0"></feColorMatrix>
+	<feGaussianBlur  stdDeviation="3" in="out" result="out"></feGaussianBlur>
+	<feBlend  mode="normal" in2="out" in="SourceGraphic" result="Drop_Shadow1"></feBlend>
+</filter>
+<path fill="none" d="z"/>
+<g>
+	<g id="circle" filter="url(#filter1)">
+		<circle fill="none" stroke="#FFFFFF" stroke-width="2" cx="42" cy="37" r="35.5"/>
+	</g>
+	<g id="arrow" filter="url(#filter2)">
+		<polygon fill="#FF5400" points="37,31 37,47 51,39 		"/>
+	</g>
+</g>
+<path fill="none" d="z"/>
+</svg>

@@ -1,0 +1,113 @@
+.table>tbody>tr>td,
+.table>tfoot>tr>td {
+  vertical-align: middle;
+}
+
+@media screen and (max-width: 600px) {
+  table#cart tbody td .form-control {
+    width: 20%;
+    display: inline !important;
+  }
+  .actions .btn {
+    width: 36%;
+    margin: 1.5em 0;
+  }
+  .actions .btn-info {
+    float: left;
+  }
+  .actions .btn-danger {
+    float: right;
+  }
+  table#cart thead {
+    display: none;
+  }
+  table#cart tbody td {
+    display: block;
+    padding: .6rem;
+    min-width: 320px;
+  }
+  table#cart tbody tr td:first-child {
+    background: #333;
+    color: #fff;
+  }
+  table#cart tbody td:before {
+    content: attr(data-th);
+    font-weight: bold;
+    display: inline-block;
+    width: 8rem;
+  }
+  table#cart tfoot td {
+    display: block;
+  }
+  table#cart tfoot td .btn {
+    display: block;
+  }
+}
+
+
+.btn-info {
+    color: #fff!important;
+    background-color: #ff5400;
+    border-color: #ff5400;
+}
+
+.btn-info:hover {
+    color: #fff;
+    background-color: #d34600;
+    border-color: #d34600;
+}
+
+.btn-danger {
+    color: #fff;
+    background-color: #ea0a0b;
+    border-color: #ea0a0b;
+}
+
+.btn-danger:hover {
+    color: #fff;
+    background-color: #c70c0d;
+    border-color: #c70c0d;
+}
+
+.btn-warning {
+    color: #fff!important;
+    background-color: #222222;
+    border-color: #222222;
+}
+
+.btn-warning:hover {
+    color: #fff!important;
+    background-color: #121212;
+    border-color: #121212;
+}
+
+.btn-warning:active {
+    color: #fff!important;
+    background-color: #121212;
+    border-color: #121212;
+}
+
+.btn-paypal {
+    color: #fff!important;
+    background-color: #238ae6;
+    border-color: #238ae6;
+}
+
+.btn-paypal:hover {
+    color: #fff!important;
+    background-color: #1b69af;
+    border-color: #1b69af;
+}
+
+.btn-paypal:active {
+    color: #fff!important;
+    background-color: #1b69af;
+    border-color: #1b69af;
+}
+
+
+
+
+
+
+
