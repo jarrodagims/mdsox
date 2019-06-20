@@ -17,10 +17,17 @@ register_nav_menus( array( 'main-menu' => esc_html__( 'Main Menu', 'blankslate' 
 add_action( 'wp_enqueue_scripts', 'blankslate_load_scripts' );
 function blankslate_load_scripts() {
 wp_enqueue_style( 'blankslate-style', get_stylesheet_uri() );
+
+if(is_checkout()) {
+
+  wp_enqueue_style('bootstrap4', 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css');
+
+}
+
 wp_register_script( 'requires', get_stylesheet_directory_uri() . '/js/requires.js', array( 'jquery'), TRUE );
 wp_register_script( 'magnific', get_stylesheet_directory_uri() . '/js/jquery.magnific-popup.min.js', array('jquery'), TRUE);
 wp_register_script( 'scripts', get_stylesheet_directory_uri() . '/js/scripts.min.js', array('jquery', 'requires'), TRUE );
-
+ 
 wp_enqueue_script( 'requires' );
 wp_enqueue_script( 'magnific' );
 wp_enqueue_script( 'scripts' );
@@ -259,15 +266,77 @@ function remove_add_to_cart_message() {
     return;
 }
 
-function before_review() {
-  echo '<div style="background: red !important;" >';
+// add_filter('woocommerce_form_field_args', function ($args, $key, $value) {
+//   $args['input_class'][] = 'form-control';
+//   $args['class'][] = 'form-group';
+//   return $args;
+// }, 10, 3);
+
+
+function lv2_add_bootstrap_input_classes( $args, $key, $value = null ) {
+	/* This is not meant to be here, but it serves as a reference
+	of what is possible to be changed.
+	$defaults = array(
+		'type'			  => 'text',
+		'label'			 => '',
+		'description'	   => '',
+		'placeholder'	   => '',
+		'maxlength'		 => false,
+		'required'		  => false,
+		'id'				=> $key,
+		'class'			 => array(),
+		'label_class'	   => array(),
+		'input_class'	   => array(),
+		'return'			=> false,
+		'options'		   => array(),
+		'custom_attributes' => array(),
+		'validate'		  => array(),
+		'default'		   => '',
+	); */
+	// Start field type switch case
+	switch ( $args['type'] ) {
+		case "select" :  /* Targets all select input type elements, except the country and state select input types */
+			$args['class'][] = 'form-group'; // Add a class to the field's html element wrapper - woocommerce input types (fields) are often wrapped within a <p></p> tag
+			$args['input_class'] = array('form-control', 'input-lg'); // Add a class to the form input itself
+			//$args['custom_attributes']['data-plugin'] = 'select2';
+			$args['label_class'] = array('control-label');
+			$args['custom_attributes'] = array( 'data-plugin' => 'select2', 'data-allow-clear' => 'true', 'aria-hidden' => 'true',  ); // Add custom data attributes to the form input itself
+		break;
+		case 'country' : /* By default WooCommerce will populate a select with the country names - $args defined for this specific input type targets only the country select element */
+			$args['class'][] = 'form-group single-country';
+			$args['label_class'] = array('control-label');
+		break;
+		case "state" : /* By default WooCommerce will populate a select with state names - $args defined for this specific input type targets only the country select element */
+			$args['class'][] = 'form-group'; // Add class to the field's html element wrapper
+			$args['input_class'] = array('form-control', 'input-lg'); // add class to the form input itself
+			//$args['custom_attributes']['data-plugin'] = 'select2';
+			$args['label_class'] = array('control-label');
+			$args['custom_attributes'] = array( 'data-plugin' => 'select2', 'data-allow-clear' => 'true', 'aria-hidden' => 'true',  );
+		break;
+		case "password" :
+		case "text" :
+		case "email" :
+		case "tel" :
+		case "number" :
+			$args['class'][] = 'form-group';
+			//$args['input_class'][] = 'form-control input-lg'; // will return an array of classes, the same as bellow
+			$args['input_class'] = array('form-control', 'input-lg');
+			$args['label_class'] = array('control-label');
+		break;
+		case 'textarea' :
+			$args['input_class'] = array('form-control', 'input-lg');
+			$args['label_class'] = array('control-label');
+		break;
+		case 'checkbox' :
+		break;
+		case 'radio' :
+		break;
+		default :
+			$args['class'][] = 'form-group';
+			$args['input_class'] = array('form-control', 'input-lg');
+			$args['label_class'] = array('control-label');
+		break;
+	}
+	return $args;
 }
-
-function after_review() {
-  echo '</div>';
-}
-
-
-add_action( 'woocommerce_checkout_before_order_review', 'before_review' );
-
-add_action( 'woocommerce_checkout_after_order_review', 'after_review' );
+add_filter('woocommerce_form_field_args','lv2_add_bootstrap_input_classes',10,3);
