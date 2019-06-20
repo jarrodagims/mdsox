@@ -118,6 +118,16 @@
 <script>
 jQuery(function($) {
 
+  $('.popup-image').magnificPopup({
+    disableOn: 700,
+    type: 'image',
+    mainClass: 'mfp-fade',
+    removalDelay: 160,
+    preloader: false,
+    fixedContentPos: "auto",
+    closeBtnInside: false
+  });
+
   $('.popup-youtube').magnificPopup({
     disableOn: 700,
     type: 'iframe',

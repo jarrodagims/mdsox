@@ -82,6 +82,7 @@ if ( post_password_required() ) {
                   </div>
                   <div class="cu-tweenmax" data-a-init="x:-50, alpha:0"
                     data-a-to="x:0, alpha:1, duration:0.9, delay:0.6, ease:Cubic.easeOut">
+                    <h2 class="t-40 f-extra-light m-y-20 l-h-100 f-bold"><?php the_title(); ?></h2>
                     <?php
 		/**
 		 * Hook: woocommerce_single_product_summary.
@@ -97,6 +98,8 @@ if ( post_password_required() ) {
 		 */
 		do_action( 'woocommerce_single_product_summary' );
 		?>
+
+
                   </div>
                 </div>
               </div>
