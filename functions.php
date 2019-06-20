@@ -19,7 +19,7 @@ function blankslate_load_scripts() {
 wp_enqueue_style( 'blankslate-style', get_stylesheet_uri() );
 wp_register_script( 'requires', get_stylesheet_directory_uri() . '/js/requires.js', array( 'jquery'), TRUE );
 wp_register_script( 'magnific', get_stylesheet_directory_uri() . '/js/jquery.magnific-popup.min.js', array('jquery'), TRUE);
-wp_register_script( 'scripts', get_stylesheet_directory_uri() . '/js/scripts.min.js', array( 'jquery'), TRUE );
+wp_register_script( 'scripts', get_stylesheet_directory_uri() . '/js/scripts.min.js', array( 'jquery', 'requires'), TRUE );
 
 wp_enqueue_script( 'requires' );
 wp_enqueue_script( 'magnific' );
@@ -29,26 +29,7 @@ wp_enqueue_script( 'jquery' );
 add_action( 'wp_footer', 'blankslate_footer_scripts' );
 function blankslate_footer_scripts() {
 ?>
-<script>
-jQuery(document).ready(function($) {
-    var deviceAgent = navigator.userAgent.toLowerCase();
-    if (deviceAgent.match(/(iphone|ipod|ipad)/)) {
-        $("html").addClass("ios");
-        $("html").addClass("mobile");
-    }
-    if (navigator.userAgent.search("MSIE") >= 0) {
-        $("html").addClass("ie");
-    } else if (navigator.userAgent.search("Chrome") >= 0) {
-        $("html").addClass("chrome");
-    } else if (navigator.userAgent.search("Firefox") >= 0) {
-        $("html").addClass("firefox");
-    } else if (navigator.userAgent.search("Safari") >= 0 && navigator.userAgent.search("Chrome") < 0) {
-        $("html").addClass("safari");
-    } else if (navigator.userAgent.search("Opera") >= 0) {
-        $("html").addClass("opera");
-    }
-});
-</script>
+
 <?php
 }
 add_filter( 'document_title_separator', 'blankslate_document_title_separator' );
@@ -122,18 +103,18 @@ return $count;
 }
 }
 
-function mytheme_add_woocommerce_support() {
-	add_theme_support( 'woocommerce' );
-}
-add_action( 'after_setup_theme', 'mytheme_add_woocommerce_support' );
+// function mytheme_add_woocommerce_support() {
+// 	add_theme_support( 'woocommerce' );
+// }
+// add_action( 'after_setup_theme', 'mytheme_add_woocommerce_support' );
 
 /* Adds TM Custom Options */
 
-function my_custom_function(){
-    do_action("woocommerce_tm_epo");
-}
+// function my_custom_function(){
+//     do_action("woocommerce_tm_epo");
+// }
 
-add_action( 'woocommerce_before_add_to_cart_button','my_custom_function');
+// add_action( 'woocommerce_before_add_to_cart_button','my_custom_function');
 
 /* Remove data tabs */
 
@@ -156,30 +137,35 @@ function sv_remove_product_page_skus( $enabled ) {
     return $enabled;
 }
 add_filter( 'wc_product_sku_enabled', 'sv_remove_product_page_skus' );
+
 remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40 );
 
 // Disabled by default for several reasons but can be enabled like such
-function my_woo_product_slider() {
-    return true;
-}
-add_filter( 'wpex_woo_product_slider', 'my_woo_product_slider' );
+// function my_woo_product_slider() {
+//     return true;
+// }
+// add_filter( 'wpex_woo_product_slider', 'my_woo_product_slider' );
 
 
 add_action( 'get_header', 'bbloomer_remove_storefront_sidebar' );
  
 function bbloomer_remove_storefront_sidebar() {
-   if ( is_product() ) {
       remove_action( 'storefront_sidebar', 'storefront_get_sidebar', 10 );
-   }
 }
 
-add_action( 'wp', 'bbloomer_remove_sidebar_product_pages' );
- 
-function bbloomer_remove_sidebar_product_pages() {
-if ( is_product() ) {
+
+/**
+ * Remove woocommerce sidebar
+ */
+
+add_action( 'wp', 'remove_sidebar' );
+function remove_sidebar() {
 remove_action( 'woocommerce_sidebar', 'woocommerce_get_sidebar', 10 );
 }
-}
+
+/**
+ * Remove shop breadcrumbs
+ */
 
 add_action('template_redirect', 'remove_shop_breadcrumbs' );
 function remove_shop_breadcrumbs(){
@@ -187,3 +173,66 @@ function remove_shop_breadcrumbs(){
         remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20, 0);
  
 }
+
+/**
+ * Remove added to cart message
+ */
+
+function move_woocommerce_message(){
+remove_action( 'woocommerce_before_single_product', 'wc_print_notices', 10 );
+}
+add_filter('wp', 'move_woocommerce_message');
+
+/**
+ * Remove related products output
+ */
+remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20 );
+
+
+/**
+ * Add before and after cart markup
+ */
+
+ function before_cart() {
+   include_once('cart-before.php');
+ }
+
+ function after_cart() {
+   echo include_once('cart-after.php');
+}
+
+add_action( 'woocommerce_before_cart', 'before_cart' );
+
+add_action( 'woocommerce_after_cart', 'after_cart' );
+
+add_action( 'woocommerce_before_checkout_form', 'before_cart' );
+
+add_action( 'woocommerce_after_checkout_form', 'after_cart' );
+
+
+remove_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form' );
+
+// add_action( 'woocommerce_after_checkout_form', 'woocommerce_checkout_coupon_form' );
+
+
+/**
+ * Hide the "In stock" message on product page.
+ *
+ * @param string $html
+ * @param string $text
+ * @param WC_Product $product
+ * @return string
+ */
+function my_wc_hide_in_stock_message( $html, $text, $product ) {
+	$availability = $product->get_availability();
+	if ( isset( $availability['class'] ) && 'in-stock' === $availability['class'] ) {
+		return '';
+	}
+	return $html;
+}
+add_filter( 'woocommerce_stock_html', 'my_wc_hide_in_stock_message', 10, 3 );
+
+function disable_woo_commerce_sidebar() {
+	remove_action( 'woocommerce_sidebar', 'woocommerce_get_sidebar', 10); 
+}
+add_action('init', 'disable_woo_commerce_sidebar');

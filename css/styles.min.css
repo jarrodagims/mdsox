@@ -58,10 +58,10 @@ ul li {
 }
 
 ul li::before {
-	font-family: 'FontAwesome';
-	content: "\f00c";
-	margin: 0 10px 0 -25px;
-	color: #888
+	/* font-family: 'FontAwesome'; */
+	/* content: "\f00c"; */
+/* 	margin: 0 10px 0 -25px; */
+	/* color: #888; */
 }
 
 .underline-hover {
