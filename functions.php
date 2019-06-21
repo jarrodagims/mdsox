@@ -211,9 +211,21 @@ remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_r
    include_once('cart-after.php');
 }
 
+function before_page() {
+	include_once('page-before.php');
+}
+
+function after_page() {
+	include_once('page-after.php');
+}
+
 add_action( 'woocommerce_before_cart', 'before_cart' );
 
 add_action( 'woocommerce_after_cart', 'after_cart' );
+
+add_action( 'woocommerce_before_checkout_form', 'before_cart' );
+
+add_action( 'woocommerce_after_checkout_form', 'after_cart' );
 
 add_action( 'woocommerce_before_checkout_form', 'before_cart' );
 
